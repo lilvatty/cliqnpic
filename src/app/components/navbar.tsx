@@ -24,7 +24,7 @@ const Navbar = () => {
   
   return (
     <div
-    className="fixed flex items-center justify-between w-full top-0 left-0 py-3 bg-primary-white/30 backdrop-blur-md shadow-md ">
+    className="fixed flex items-center justify-between w-full top-0 left-0 py-3 bg-primary-white/30 backdrop-blur-md shadow-md z-50">
         <Image
         className=" relative -left-6 lg:static"
         src="/logo.png"

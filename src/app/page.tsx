@@ -1,9 +1,10 @@
+import ChooseUs from "./components/chooseUs";
 import Hero from "./components/hero";
 
 export default function Home() {
   return (
     <main
-    className='px-6 bg-primary-white'>
+    className='px-6 bg-primary-white font-poppins mt-16'>
       
       <section
       className='flex flex-col items-center'>
@@ -12,7 +13,7 @@ export default function Home() {
 
       <section 
       className='flex flex-col items-center'>
-
+        <ChooseUs/>
       </section>
 
       <section>
