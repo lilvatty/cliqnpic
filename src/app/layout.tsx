@@ -5,7 +5,7 @@ import Navbar from "./components/navbar";
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: ["300","400","700"],
+  weight: ["300","400","600","700"],
   subsets: ['latin']
 });
 
