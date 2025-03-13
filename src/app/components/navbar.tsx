@@ -23,7 +23,7 @@ const Navbar = () => {
   }, []);
   
   return (
-    <div
+    <nav
     className="fixed flex items-center justify-between w-full top-0 left-0 py-3 bg-primary-white/30 backdrop-blur-md shadow-md z-50">
         <Image
         className=" relative -left-6 lg:static"
@@ -46,7 +46,7 @@ const Navbar = () => {
         className="mr-16 cursor-pointer hidden lg:block">
             Reach Us!
         </button>
-    </div>
+    </nav>
   )
 }
 

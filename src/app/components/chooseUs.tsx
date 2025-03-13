@@ -1,30 +1,40 @@
+'use client'
 import { chooseUs } from '../constants/index'
+import {motion} from 'framer-motion'
 
 export default function ChooseUs(){
-
-  const isEven = (id: number) => id % 2 === 0;  
-  const bgBlack = "bg-primary-black text-primary-white";
-  const bgWhite = "bg-white text-primary-black";
   
   return(
     <div
-    className='flex flex-col w-full items-center border'>
-      <div className='flex flex-col items-center'>
-        <h2 className='text-primary-orange text-lg mb-1'>Our Goals</h2>
-        <h3 className='text-2xl md:text-3xl font-semibold text-center w-[27rem]'>Our Mission is to make Your <span className='bg-primary-orange inline-block px-2 rounded-md shadow-md font-bold'>Events</span> better through our Services</h3>
-      </div>
+    className='flex flex-col w-full items-center my-30'>
+      <motion.div 
+      initial={{opacity:0, y: 50}}
+      whileInView={{opacity:1, y: 0}}
+      viewport={{margin: "-100px"}}
+      transition={{duration: 0.5, ease: "easeOut"}}
+      exit={{ opacity: 0, y: -50 }}
+      className='flex flex-col items-center'>
+        <h2 className='text-primary-black font-inter font-bold text-4xl lg:text-5xl mb-3'>Our goals</h2>
+        <h3 className='text-lg lg:text-xl font-poppins text-secondary-black text-center w-[27rem] leading-relaxed'>Our mission is to make your event better through our services</h3>
+      </motion.div>
       <div
-      className="w-full mt-14 flex flex-wrap gap-4 justify-center text-primary-black">
+      className="mt-10 grid grid-cols-1 lg:mt-20 lg:grid-cols-2 gap-10 text-primary-black place-content-center place-items-center">
         {chooseUs.map(({id, icon: Icon, title, description}) => (
-          <div
+          <motion.div
+          initial={{opacity:0, x: -100}}
+          whileInView={{opacity:1, x: 0}}
+          viewport={{margin: "-50px"}}
+          transition={{duration: 0.5, ease: "easeOut"}}
           key={id}
-          className={`w-[22rem] flex flex-col px-8 py-6 shadow-lg rounded-xl ${isEven(id) ? bgBlack : bgWhite}`}>
-            <div className={`w-fit rounded-full p-1.5 bg-primary-orange text-primary-white`}>
-              <Icon className="text-4xl" />
+          className="max-w-[27rem] bg-primary-black flex flex-col p-8 shadow-md rounded-md">
+            <div className='flex items-center gap-4 mb-6'>
+              <div className="w-fit rounded-sm p-2 bg-primary-white text-primary-orange">
+                <Icon className="text-4xl" />
+              </div>
+              <h3 className='font-inter font-semibold text-primary-white text-2xl'>{title}</h3>
             </div>
-            <h3 className='mt-3 font-semibold text-2xl'>{title}</h3>
-            <p className='font-light leading-relaxed'>{description}</p>
-          </div>
+            <p className='font-light text-lg text-secondary-white leading-relaxed'>{description}</p>
+          </motion.div>
         ))}
       </div>
     </div>
