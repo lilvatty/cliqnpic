@@ -12,11 +12,12 @@ interface ChooseUs {
 
 interface productPreview {
   id: number,
-  img: string[],
+  img: string,
   folder: string,
   title: string,
   description: string,
   price: number
+  tags: string[]
 }
 
 export const chooseUs: ChooseUs[] = [
@@ -49,26 +50,29 @@ export const chooseUs: ChooseUs[] = [
 export const ProductPrev: productPreview[] = [
   {
     id: 1,
-    img: ["photobox1.jpg", "photobox2.jpg", "photobox3.jpg"],
+    img: "photobox1.jpg",
     folder: "photobox",
     title: "Photobox",
-    description: "Self service photobox is the best choice for quick photo with privacy",
-    price: 1300000
+    description: "Self service photobox is the best choice for easy and quick photo with zero distraction",
+    price: 3400000,
+    tags: ['DSLR Camera', '21" Touch Screen Monitor', 'Hyper Speed Photo Printer', 'Photo Sharing', '2 Person In Charge',]
   },
   {
     id: 2,
-    img: ["photobox.png", "photo-box.jpg", "photobox.png"],
+    img: "photobox2.jpg",
     folder: "photobox",
-    title: "180 photobooth",
-    description: "this is 180 photobooth to asdlfkj h2t asdf asdf asdfalksjeiuf asdfasdl;fkjas asdlfkj  hasdfj adlskfj liadhf ",
-    price: 1300000
+    title: "Matrix Photobooth",
+    description: "12 Camera capturing at the same time create matrix type effect video suitable for indoor events",
+    price: 1300000,
+    tags: ['12 DSLR Camera', '32" Screen Monitor', 'Video Sharing Station', '2 Lighting & Softbox', 'Photo Props', '3 Person In Charge',]
   },
   {
     id: 3,
-    img: ["photobox1.jpg", "photobox2.jpg", "photobox3.jpg"],
+    img: "photobox3.jpg",
     folder: "photobox",
-    title: "photobox",
-    description: "this is photobox to asdlfkj h2t asdf asdf asdfalksjeiuf asdf",
-    price: 1300000
+    title: "Photobooth",
+    description: "The most common choice because we have so many variant that can match your theme and suitable for any types of events",
+    price: 1300000,
+    tags: ['DSLR Camera', 'Live View Screen', 'Hyper Speed Photo Printer', 'Photo Sharing', 'Photo Props', 'Photo Frames', '2 Person In Charge',]
   },
 ]

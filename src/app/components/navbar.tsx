@@ -39,7 +39,7 @@ const Navbar = () => {
         className={`${isHidden ? "scale-0 -top-10 -right-12" : "flex top-16 right-0 scale-100"} absolute cursor-pointer text-center flex-col gap-5 items-center justify-center py-4 px-10 bg-primary-black/90 text-primary-white lg:gap-10 lg:static lg:flex lg:flex-row lg:bg-transparent lg:text-primary-black lg:py-0 lg:scale-100 font-poppins font-semibold transition-all`}>
             <li><Link href="/">HOME</Link></li>
             <li><Link href="/about">ABOUT</Link></li>
-            <li><Link href="/contact">CONTACT</Link></li>
+            <li><Link href="/product">PRODUCT</Link></li>
             <li className="lg:hidden">REACH US</li>
         </ul>
         <button
