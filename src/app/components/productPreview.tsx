@@ -1,7 +1,6 @@
 "use client"
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-import { useRef, useState } from "react"
-import { ProductPrev } from "../constants/index"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -15,14 +14,32 @@ import Autoplay from "embla-carousel-autoplay"
 import RevealText from "../animation/revealText";
 import Reveal from "../animation/reveal";
 
+interface product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  tags: string[];
+}
 
 export default function ProductPreview(){
 
   const [isDetail, setIsDetail] = useState<boolean>(false)
+  const [products, setProducts] = useState<product[]>([])
   
   const plugin = useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true })
   )
+  
+  useEffect(() => {
+    const getProduct = async () => {
+      const res = await fetch("/api/product");
+      const {data} = await res.json()
+      setProducts(data);
+    }
+    getProduct()
+  }, [])
   
   return(
     <div
@@ -48,7 +65,7 @@ export default function ProductPreview(){
         >
           <CarouselContent
           className="w-[24rem] md:w-fit">
-            {ProductPrev.map(({id, title, img, folder, description, price, tags}) => (
+            {products.map(({id, name, image, description, price, tags}) => (
               <CarouselItem key={id}>
                 <div>
                   <Card className="p-0 border-0">
@@ -61,10 +78,10 @@ export default function ProductPreview(){
                       object-cover w-full h-[30rem] rounded-t-xl
                       md:min-h-full md:rounded-l-xl md:rounded-t-none
                       lg:h-[30rem]"
-                      src={`/${folder}/${img}`}
+                      src={`/photobox/${image}`}
                       width={500}
                       height={500}
-                      alt={img}
+                      alt={image}
                       />
                       <div className="relative p-10 flex flex-col gap-3">
                         <RevealText>
@@ -72,7 +89,7 @@ export default function ProductPreview(){
                           className="
                           font-bold font-inter text-2xl
                           md:text-3xl">
-                            {title}
+                            {name}
                           </h2>
                         </RevealText>
                         <RevealText>
