@@ -78,10 +78,10 @@ export default function ProductPreview(){
                       object-cover w-full h-[30rem] rounded-t-xl
                       md:min-h-full md:rounded-l-xl md:rounded-t-none
                       lg:h-[30rem]"
-                      src={`/photobox/${image}`}
+                      src={image[0]}
                       width={500}
                       height={500}
-                      alt={image}
+                      alt={`${name}-image.jpg`}
                       />
                       <div className="relative p-10 flex flex-col gap-3">
                         <RevealText>

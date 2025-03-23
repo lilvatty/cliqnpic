@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Product from "../components/product";
 
 
 interface product {
@@ -11,7 +11,7 @@ interface product {
   name: string;
   description: string;
   price: number;
-  image: string;
+  image: string[];
   tags: string[];
 }
 
@@ -23,10 +23,11 @@ export default function Admin () {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>();
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<string[]>([]);
+  const [imageChange, setImageChange] = useState<string>("")
 
   const router = useRouter()
-  
+
   const handleClick = (id: number) => {
     router.push(`/admin-dashboard/product/${id}`)
   }
@@ -54,12 +55,16 @@ export default function Admin () {
     setName('');
     setPrice(0);
     setDescription('');
-    setImage('')
+    setImageChange('')
   }
  
   useEffect(() => {
     setEquipment(equipmentChange.split(',').map((item) => item.trim()))
   }, [equipmentChange])
+
+  useEffect(() => {
+    setImage(imageChange.split(',').map(item => item.trim()))
+  }, [imageChange])
 
   useEffect(() => {
     const getData = async () => {
@@ -77,6 +82,7 @@ export default function Admin () {
   
   return(
     <div className="h-screen mt-16 flex">
+
       <div className="grow flex flex-col items-center p-10">
         <p className="font-inter text-3xl font-bold">Add product</p>
         <form 
@@ -89,7 +95,7 @@ export default function Admin () {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border w-[40rem] h-10 items-center px-2" 
+            className="border w-full h-10 items-center px-2" 
             type="text" />
           </div>
 
@@ -99,7 +105,7 @@ export default function Admin () {
             required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="border w-[40rem] h-10 items-center px-2" 
+            className="border w-full h-10 items-center px-2" 
             type="text" />
           </div>
 
@@ -109,7 +115,7 @@ export default function Admin () {
             required
             value={price}
             onChange={(e) => setPrice(parseInt(e.target.value))}
-            className="border w-[40rem] h-10 items-center px-2" 
+            className="border w-full h-10 items-center px-2" 
             type="number" />
           </div>
 
@@ -119,7 +125,7 @@ export default function Admin () {
             required
             value={equipmentChange}
             onChange={(e) => setEquipmentChange(e.target.value)}
-            className=" border w-[40rem] h-10 items-center px-2" 
+            className=" border w-full h-10 items-center px-2" 
             type="text" />
           </div>
 
@@ -127,9 +133,9 @@ export default function Admin () {
             <label className="w-[10rem]">Image</label>
             <input
             required
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            className=" border w-[40rem] h-10 items-center px-2" 
+            value={imageChange}
+            onChange={(e) => setImageChange(e.target.value)}
+            className=" border w-full h-10 items-center px-2" 
             type="text" />
           </div>
 
@@ -138,36 +144,11 @@ export default function Admin () {
       </div>
       
       <div 
-      className="flex flex-col gap-5 h-full overflow-scroll p-10 border-l-2 border-secondary-white">
+      className="flex flex-col w-[40rem] h-full overflow-scroll p-10 shadow-lg">
         {data.length <= 0 && <div>No Product</div> }
-        {data.map(({id, image, description, name, price, tags}) => (
-          <div
-          className=" shadow-md w-[25rem] flex flex-col"
-          key={id}
-          onClick={() => handleClick(id)}>
-            <Image 
-            className="object-cover w-full"
-            src={`/photobox/${image}`}
-            width={200}
-            height={200}
-            alt="image"/>
-            <div className="flex flex-col p-5">
-              <h2 className="text-2xl font-inter font-semibold mb-2">{name}</h2>
-              <p className="mb-2">{description}</p>
-              <p className="text-primary-orange text-sm">package include: </p>
-              <div className="flex flex-wrap gap-1 mb-2">
-                {tags.map((tag, index) => (
-                  <span
-                  className="border p-1 border-primary-orange"
-                  key={index}>{tag}</span>
-                ))}
-              </div>
-              <p className="text-primary-orange text-sm">start price:</p>
-              <p>IDR {price.toLocaleString('id-ID')}</p>
-            </div>
-          </div>
-        ))}
+        <Product onClick={handleClick} data={data}/>
       </div>
+
     </div>
   )
 }
