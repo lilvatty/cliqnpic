@@ -8,9 +8,10 @@ const Navbar = () => {
 
   const [isHidden, setIsHidden] = useState<boolean>(true);
   
-  const handleClickOutsideIcon = (event: any) => {
+  const handleClickOutsideIcon = (event: MouseEvent) => {
     // Check if the clicked element is NOT the icon
-    if (!event.target.closest(".icon-button")) {
+    const target = event.target as HTMLElement
+    if (!target.closest(".icon-button")) {
       setIsHidden(true);
     }
   };
